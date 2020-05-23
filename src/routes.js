@@ -1,12 +1,12 @@
 import Login from './components/auth/Login.vue'
 import Register from './components/auth/Register.vue'
 import Dashboard from './components/Dashboard.vue'
-
 import AppProducts from './components/products/Products.vue'
-
 import Preferences from './components/preferences/Preferences.vue'
 import TruckTypes from './components/preferences/truck/truck-types/TruckTypes.vue'
 import LoadingSites from './components/preferences/loading-site/LoadingSites.vue'
+import AllLoadingSites from './components/preferences/loading-site/ViewAll.vue'
+
 
 export const routes = [
     { path: '*', redirect: '/dashboard'},
@@ -22,7 +22,10 @@ export const routes = [
             { path: 'truck-types', component: TruckTypes, children:[
                 {path: ':id/edit' }
             ]},
-            { path: 'loading-sites', component: LoadingSites}
+            { path: 'loading-sites', component: LoadingSites, children: [
+                { path: ':id/edit'},
+                { path: 'view-all', component: AllLoadingSites}
+            ]}
         ]
     }
     
