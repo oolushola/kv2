@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 import auth from './modules/auth'
 import product from './modules/product'
 import trucktype from './modules/truckType'
+import loadingsite from './modules/loadingsite'
 
 Vue.use(Vuex);
 
@@ -10,6 +11,7 @@ export const store = new Vuex.Store({
     modules: {
         auth,
         product,
-        trucktype
+        trucktype,
+        loadingsite
     }
 })
