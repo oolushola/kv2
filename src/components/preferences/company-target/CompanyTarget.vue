@@ -1,0 +1,10 @@
+<template>
+    <tr>
+        <td>Year</td>
+        <td>Year</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+</template>
