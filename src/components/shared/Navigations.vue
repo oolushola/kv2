@@ -254,10 +254,9 @@
 								</router-link>
 
 								<ul class="nav nav-group-sub" data-submenu-title="Starter kit">
-									<li class="nav-item"><a href="companies-profile" class="nav-link active">Kaya Profile</a></li>
-									<li class="nav-item"><a href="product-category" class="nav-link">Product Category</a></li>
+									<li class="nav-item"><a href="company-profile" class="nav-link active">Kaya Profile</a></li>
 									<li class="nav-item">
-										<router-link to="products" class="nav-link">Products</router-link>
+										<router-link to="/preferences/products" class="nav-link">Products</router-link>
 									</li>
 									<li class="nav-item">
 										<router-link to="/preferences/truck-types" class="nav-link" activeClass="active">Truck Types</router-link>

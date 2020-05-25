@@ -48,15 +48,13 @@ export default {
     data() {
         return {
             preferences: [
-                { name: 'Kaya Profile', uri: 'kaya-profile'},
-                { name: 'Product Category', uri: 'product-category'},
+                { name: 'Kaya Profile', uri: 'company-profile'},
                 { name: 'Products', uri: 'products'},
                 { name: 'Truck Types', uri: 'truck-types'},
                 { name: 'Loading Sites', uri: 'loading-sites'},
-                { name: 'Available Cargo', uri: 'cargo-availability'},
                 { name: 'Targets', uri: 'company-target'},
                 { name: 'Invoice Subheading', uri: 'invoice-subheading'},
-                { name: 'BUH Monthly Target', uri: 'buh-monthly-target'},
+                { name: 'Unit Head Targets', uri: 'unit-head-targets'},
                 
             ]
         }

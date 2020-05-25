@@ -22,9 +22,13 @@
             </div>
         </div>
         <div class="row">
+
             <div class="col-md-12">
                 <router-view></router-view>
             </div>
+
+            
+
             <div class="col-md-5">
                 &nbsp;
                 <app-loading-site-frm :regionalState="provinces"></app-loading-site-frm>
@@ -62,12 +66,19 @@ import LoadingSiteFrm from './LoadingSiteForm.vue'
 import LoadingSite from './LoadingSite.vue'
 import { mapGetters } from 'vuex'
 export default {
+    data() {
+        return {
+
+            routeChecker: false
+        }
+    },
     computed: {
         ...mapGetters([
             'loadingSites',
             'provinces'
         ])
     },
+
     components: {
         appLoadingSiteFrm: LoadingSiteFrm,
         appLoadingSite:LoadingSite
