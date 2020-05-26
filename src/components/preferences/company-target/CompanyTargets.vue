@@ -23,7 +23,6 @@
                     <thead class="table-success font-weight-bold">
                         <tr>
                             <td class="text-center">SN</td>
-                            <td>Year</td>
                             <td>Month</td>
                             <td>Target</td>                            
                             <td class="text-center">Edit</td>
@@ -31,10 +30,11 @@
                         </tr>
                     </thead>
                     <tbody style="font-size:11px;">
-                        <app-target></app-target>
+                        <app-target v-for="(target, index) in companyTargetRecords" :key="index" :target="target" :sn="index+=1"></app-target>
                     </tbody>
                 </table>
             </div>
+            
         </div>
     </div>
 </template>
@@ -50,12 +50,18 @@ export default {
         }
     },
 
+    computed: {
+        companyTargetRecords() {
+            return this.$store.getters.companyTargets
+        },
+    },
+
     components: {
         appTargetForm: CompanyTargetForm,
         appTarget:companyTarget
     },
     created() {
-        // this.$store.dispatch('fetchAllLoadingSites')
+        this.$store.dispatch('fetchAllCompanyTarget')
     }
 }
 </script>

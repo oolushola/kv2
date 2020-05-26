@@ -1,7 +1,7 @@
 import Login from './components/auth/Login.vue'
 import Register from './components/auth/Register.vue'
 import Dashboard from './components/Dashboard.vue'
-import AppProducts from './components/products/Products.vue'
+import AppProducts from './components/preferences/products/Products.vue'
 import Preferences from './components/preferences/Preferences.vue'
 import TruckTypes from './components/preferences/truck/truck-types/TruckTypes.vue'
 import LoadingSites from './components/preferences/loading-site/LoadingSites.vue'
@@ -31,17 +31,11 @@ export const routes = [
             ]},
             { path: 'loading-sites', component: LoadingSites, name: 'loadingsite', children: [
                 { path: ':id/edit'},
-                { path: 'view-all', component: AllLoadingSites}
             ]},
-            { path: 'company-target', component: CompanyTargets, name: 'companytargets', children: [
-                { path: ':/edit'}
-            ]},
-            { path: 'invoice-subheading', component: InvoiceSubheading, name: 'Invoicesubheading', children: [
-                { path: ':/id/edit' }
-            ]},
-            { path: 'unit-head-targets', component: BuhTarget, name: 'unitheadtarget', children: [
-                { path: ':id/edit'}
-            ]}
+            { path: 'loading-sites/view-all', component: AllLoadingSites},
+            { path: 'company-target', component: CompanyTargets, name: 'companytargets'},
+            { path: 'invoice-subheading', component: InvoiceSubheading, name: 'Invoicesubheading'},
+            { path: 'unit-head-targets', component: BuhTarget, name: 'unitheadtarget' },
         ]
     }
     
