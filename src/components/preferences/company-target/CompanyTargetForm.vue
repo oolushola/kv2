@@ -13,10 +13,12 @@
                 </div>
 
                 <div class="text-right">
-                    <span id="loader"></span>    
-                        <button type="submit" @click.prevent="addCompanyTarget"  class="btn btn-primary" >Add Loading Site<i class="icon-paperplane ml-2"></i></button>
+                    <span ref="loader"></span>    
+                        <button type="submit" v-if="!onEdit" @click.prevent="addCompanyTarget"  class="btn btn-primary" >Add Target<i class="icon-paperplane ml-2"></i></button>
+
+                        <button type="submit" v-else @click.prevent="updateCompanyTarget"  class="btn btn-primary" >Update Target<i class="icon-paperplane ml-2"></i></button>
                 </div>
-                {{ testing }}
+                 {{ onEditRecord }} 
             </form>
         </div>
     </div>
@@ -30,12 +32,85 @@ export default {
         return {
             target: '',
             onEdit: false,
-            testing: caseMe('I like what am seeing')
+            currentMonth: monthFormatter(new Date().getMonth()+1)
         }
+    },
+    computed: {
+        onEditRecord() {
+            const result = this.$store.getters.specificRecord
+            if(result) {
+                this.target = result.target
+                this.onEdit = true
+            }
+        }
+    },
+    methods: {
+        addCompanyTarget() {
+            this.$store.dispatch('addNewCompanyTarget', {
+                'currentYear': new Date().getFullYear(),
+                'currentMonth': this.currentMonth,
+                'target': this.target,
+            });
+            this.target = ''
+        },
+        updateCompanyTarget() {
+            const target = this.$store.getters.specificRecord;
+            this.$refs.loader.innerHTML = '<i class="spinner icon-spinner2"></i>Please wait..'
+            this.$store.dispatch('updateCompanyTarget', {
+                'currentYear': new Date().getFullYear(),
+                'currentMonth': this.currentMonth,
+                'target': this.target,
+                'id' : target.id
+            });
+            this.target = ''
+            this.$refs.loader.innerHTML = '<i class="icon-checkmark2"></i>Updated successfully'
+        },
     }
 }
 
-function caseMe(value) {
-    console.log(value)
+function monthFormatter(value) {
+    let response = ''
+    switch(value) {
+        case 1: 
+            response = 'January'
+            break;
+        case 2: 
+            response = 'February'
+            break;
+        case 3:
+            response = 'March'
+            break;
+        case 4:
+            response = 'April'
+            break;
+        case 5:
+            response = 'May'
+            break;
+        case 6:
+            response = 'June'
+            break;
+        case 7:
+            response = 'July'
+            break;
+        case 8:
+            response = 'August'
+            break;
+        case 9:
+            response = 'September'
+            break;
+        case 10:
+            response = 'October'
+            break;
+        case 11:
+            response = 'November'
+            break;
+        case 12: 
+            response = 'December'
+            break
+        default:
+            response = 'NA'
+    }   
+
+    return response;
 }
 </script>
