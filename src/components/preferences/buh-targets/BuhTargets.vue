@@ -19,16 +19,27 @@
                     <thead class="table-success font-weight-bold">
                         <tr>
                             <td class="text-center">SN</td>
-                            <td>Year</td>
+                            <td>Full Name</td>
                             <td>Month</td>
                             <td>Target</td>                            
                             <td class="text-center">Edit</td>
                             <td class="text-center">Delete</td>
                         </tr>
                     </thead>
-                    <tbody style="font-size:11px;">
-                        <app-buh-target></app-buh-target>
-                    </tbody>
+                        <tr v-if="unitHeadTargets.length <=0 ">
+                            <td colspan="7">There are no targets available yet.</td>
+                        </tr>
+                        <transition-group tag="tbody" 
+                            enter-to-class="animated fadeIn" 
+                            leave-to-class="animated fadeOut" 
+                            style="font-size:11px; font-family:DIN Alternate" 
+                            >
+                            <app-buh-target 
+                                v-for="(targets, index) in unitHeadTargets" 
+                                :key="targets.id" :unitHeadTargets="targets" 
+                                :sn="index+=1" :class="{'table-success': index % 2 == 0}"></app-buh-target>
+                        </transition-group>
+                    
                 </table>
             </div>
         </div>
@@ -40,20 +51,18 @@ import BuhTargetForm from './BuhTargetForm.vue'
 import BuhTarget from './BuhTarget.vue'
 
 export default {
-    data() {
-        return {
-
-            routeChecker: false
+    computed: {
+        unitHeadTargets() {
+            return this.$store.getters.allBusinessUnitHeadTargets
         }
     },
-    
-
     components: {
         appBuhTargetForm: BuhTargetForm,
         appBuhTarget:BuhTarget
     },
+
     created() {
-        // this.$store.dispatch('fetchAllLoadingSites')
+        this.$store.dispatch('fetchAllUnitHeadTargets')
     }
 }
 </script>
