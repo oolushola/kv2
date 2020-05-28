@@ -53,7 +53,9 @@ export default {
 </script>
 
 <style>
-  
+  .actionCursor {
+    cursor: pointer;
+  }
 </style>
 
 

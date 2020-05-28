@@ -6,6 +6,7 @@ import trucktype from './modules/truckType'
 import loadingsite from './modules/loadingsite'
 import companyTarget from './modules/companyTarget'
 import unitheadtarget from './modules/unitheadtarget'
+import invoicesubheading from './modules/invoicesubheading'
 
 Vue.use(Vuex);
 
@@ -16,6 +17,8 @@ export const store = new Vuex.Store({
         trucktype,
         loadingsite,
         companyTarget,
-        unitheadtarget
-    }
+        unitheadtarget,
+        invoicesubheading
+    },
+    
 })
