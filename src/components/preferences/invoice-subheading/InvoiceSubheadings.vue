@@ -22,20 +22,32 @@
                 <table class="table table-bordered">
                     <thead class="table-success font-weight-bold">
                         <tr>
+                            <td colspan="6" class="text-primary">Total number of invoice subheading: {{ invoiceSubheadings.length }}</td>
+                        </tr>
+                        <tr>
                             <td class="text-center">SN</td>
                             <td>Client Name</td>
-                            <td>Alternate - S.O.</td> 
-                            <td>Alternate - Invoice No.</td>         
+                            <td>Alt - S.O.</td> 
+                            <td>Alt - Invoice No.</td>         
                             <td class="text-center">Edit</td>
                             <td class="text-center">Delete</td>
                         </tr>
                     </thead>
-                    <tbody style="font-size:11px;">
-                        <app-invoice-subheading></app-invoice-subheading>
-                    </tbody>
+                    <tr>
+                        <td colspan="6" class="font-size-sm" v-if="invoiceSubheadings.length <= 0 ">You currently do not have any invoice subheading added.</td>
+                    </tr>
+                    <transition-group enter-to-class="animated fadeIn" leave-to-class="animated fadeOut" tag="tbody" class="font-size-sm">
+                        <app-invoice-subheading 
+                            v-for="(invoiceSubheading, index) in invoiceSubheadings" 
+                            :key="invoiceSubheading.id" 
+                            :sn="index+=1"
+                            :subheadings="invoiceSubheading"
+                            :class="{'table-success': index % 2 !== 0 }"></app-invoice-subheading>
+                    </transition-group>
                 </table>
             </div>
         </div>
+        
     </div>
 </template>
 
@@ -50,12 +62,18 @@ export default {
         }
     },
 
+    computed: {
+        invoiceSubheadings() {
+            return this.$store.getters.invoiceSubheadingHistory
+        }
+    },
+
     components: {
         appInvoiceSubheadingForm: invoiceSubheadingForm,
         appInvoiceSubheading:InvoiceSubheading
     },
     created() {
-        // this.$store.dispatch('fetchAllLoadingSites')
+        this.$store.dispatch('fetchInvoiceSubheading')
     }
 }
 </script>
