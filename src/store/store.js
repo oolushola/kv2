@@ -7,6 +7,7 @@ import loadingsite from './modules/loadingsite'
 import companyTarget from './modules/companyTarget'
 import unitheadtarget from './modules/unitheadtarget'
 import invoicesubheading from './modules/invoicesubheading'
+import companyprofile from './modules/companyprofile'
 
 Vue.use(Vuex);
 
@@ -18,7 +19,8 @@ export const store = new Vuex.Store({
         loadingsite,
         companyTarget,
         unitheadtarget,
-        invoicesubheading
+        invoicesubheading,
+        companyprofile
     },
     
 })
