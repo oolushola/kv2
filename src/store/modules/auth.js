@@ -44,7 +44,7 @@ const actions = {
             router.replace('/dashboard')
 
         })
-        .catch(error => console.log(error))
+        .catch(error => console.log(error.status))
     },
 
     autoLogin: ({ commit }) => {
@@ -95,12 +95,13 @@ const getters = {
         return state.user;
     },
     activeUserState(state) {
-        return state.userToken !== null
+        return state.userToken;
     },
     activeToken(state) {
-        return state.userToken
+        if(state.userToken !== '' || 'undefined') {
+            return state.userToken
+        }
     }
-
 };
 
 export default {

@@ -254,7 +254,9 @@
 								</router-link>
 
 								<ul class="nav nav-group-sub" data-submenu-title="Starter kit">
-									<li class="nav-item"><a href="company-profile" class="nav-link active">Kaya Profile</a></li>
+									<li class="nav-item">
+										<router-link to="/preferences/company-profile" class="nav-link" activeClass="active">Kaya Profile</router-link>
+									</li>
 									<li class="nav-item">
 										<router-link to="/preferences/products" class="nav-link">Products</router-link>
 									</li>
@@ -283,30 +285,23 @@
 						<li class="nav-item-header"><div class="text-uppercase font-size-xs line-height-xs">TRANSPORTATION</div> <i class="icon-menu" title="Components"></i></li>
 
 						<li class="nav-item">
-							<a href="transporters'" class="nav-link">
+							<router-link to="/transporters" activeClass="active" class="nav-link">
 								<i class="icon-train2"></i>
 								<span>Transporter</span>
-							</a>
+							</router-link>
 						</li>
-            <li class="nav-item">
-							<a href="trucks'" class="nav-link">
+            			<li class="nav-item">
+							<router-link to="/trucks" activeClass="active" tag="a" class="nav-link">
 								<i class="icon-truck"></i>
 								<span>Trucks</span>
-							</a>
+							</router-link>
 						</li>
-            <li class="nav-item">
-							<a href="drivers" class="nav-link">
+            			<li class="nav-item">
+							<router-link to="/drivers" class="nav-link" activeClass="active" tag="a">
 								<i class="icon-steering-wheel"></i>
 								<span>Drivers</span>
-							</a>
+							</router-link>
 						</li>
-						<li class="nav-item">
-							<a href="assign-driver-truck" class="nav-link">
-								<i class="icon-shutter"></i>
-								<span>Pair Truck With Driver</span>
-							</a>
-						</li>
-
 					</ul>
 				</div>
 			</div>			
