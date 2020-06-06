@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import App from './App.vue'
 import { routes } from './routes'
 import { store } from './store/store'
+import Vuelidate from 'vuelidate'
 
 import NProgress from 'nprogress'
 import '../node_modules/nprogress/nprogress.css'
@@ -32,6 +33,7 @@ router.afterEach((to, from) => {
 })
 
 Vue.use(VueRouter);
+Vue.use(Vuelidate)
 
 new Vue({
   el: '#app',

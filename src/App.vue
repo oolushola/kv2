@@ -56,6 +56,16 @@ export default {
   .actionCursor {
     cursor: pointer;
   }
+  .error {
+    color: red;
+    font-family:tahoma;
+    font-size: 11px;
+    padding-top:3px;
+    font-weight: normal;
+  }
+   .notificationLabel {
+        border:1px solid red;
+    }
 </style>
 
 
