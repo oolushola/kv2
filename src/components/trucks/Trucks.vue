@@ -21,24 +21,35 @@
             </div>
             <div class="col-md-7">
                 &nbsp;
-                <list-loader :speed="2" v-if="!myData"></list-loader>
-                <table class="table table-bordered">
+                <list-loader :speed="2" v-if="!trucks"></list-loader>
+                <table class="table table-bordered" v-else>
                     <thead class="table-success font-weight-bold">
                         <tr>
-                            <td colspan="6" class="text-primary">Total number of invoice subheading: </td>
+                            <td colspan="4" class="text-primary">Truck Count: ({{trucks.length}}) </td>
+                            <td colspan="2">
+                                <input type="text" class="form-control" placeholder="Search Truck No" v-model="searchTruck">
+                            </td>
                         </tr>
                         <tr>
                             <td class="text-center">SN</td>
-                            <td>Client Name</td>
-                            <td>Alt - S.O.</td> 
-                            <td>Alt - Invoice No.</td>         
+                            <td>Transporter</td>
+                            <td>Truck Type</td> 
+                            <td>Truck No</td>         
                             <td class="text-center">Edit</td>
                             <td class="text-center">Delete</td>
                         </tr>
                     </thead>
-                   
-                    <transition-group enter-to-class="animated fadeIn" leave-to-class="animated fadeOut" tag="tbody" class="font-size-sm">
-                        <app-truck></app-truck>
+                    <tr>
+                        <td colspan="6" v-if="trucks.length <= 0" >No truck has been added.</td>
+                    </tr>
+                    
+                    <transition-group enter-to-class="animated fadeIn" leave-to-class="animated fadeOut" speed="3" tag="tbody" class="font-size-sm" mode="in-out">
+                        <app-truck 
+                            v-for="(truck, index) in filteredTrucks" 
+                            :key="truck.truckNo" 
+                            :truck="truck" 
+                            :sn="index+=1" 
+                            :class="{'table-success':index %2 !=0}"></app-truck>
                     </transition-group>
                 </table>
             </div>
@@ -51,18 +62,30 @@
 import Truck from './Truck.vue'
 import TruckForm from './TruckForm.vue'
 import { ListLoader } from 'vue-content-loader'
-// or InstagramLoader | ListLoader | BullestlistLoader | CodeLoader
 
 export default {
     data() {
         return {
-            myData: null
+            searchTruck: ''
+        }
+    },
+    computed: {
+        trucks() {
+            return this.$store.getters.trucks
+        },
+        filteredTrucks() {
+            return this.trucks.filter(truck => {
+                return truck.truckNo.match(this.searchTruck.toUpperCase())
+            })
         }
     },
     components: {
         appTruck: Truck,
         appTruckForm: TruckForm,
         ListLoader
+    },
+    created() {
+        this.$store.dispatch('trucks')
     }
 }
 </script>
