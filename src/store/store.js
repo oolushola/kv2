@@ -9,6 +9,7 @@ import unitheadtarget from './modules/unitheadtarget'
 import invoicesubheading from './modules/invoicesubheading'
 import companyprofile from './modules/companyprofile'
 import trucks from './modules/transportation/trucks'
+import drivers from './modules/transportation/driver'
 
 Vue.use(Vuex);
 
@@ -22,7 +23,8 @@ export const store = new Vuex.Store({
         unitheadtarget,
         invoicesubheading,
         companyprofile, 
-        trucks
+        trucks,
+        drivers
     },
     
 })
