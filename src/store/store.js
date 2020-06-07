@@ -10,6 +10,7 @@ import invoicesubheading from './modules/invoicesubheading'
 import companyprofile from './modules/companyprofile'
 import trucks from './modules/transportation/trucks'
 import drivers from './modules/transportation/driver'
+import transporter from './modules/transportation/transporter'
 
 Vue.use(Vuex);
 
@@ -24,7 +25,8 @@ export const store = new Vuex.Store({
         invoicesubheading,
         companyprofile, 
         trucks,
-        drivers
+        drivers,
+        transporter
     },
     
 })
