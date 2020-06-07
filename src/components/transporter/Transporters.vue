@@ -3,29 +3,38 @@
         <div class="page-header page-header-light">
             <div class="page-header-content header-elements-md-inline">
                 <div class="page-title d-flex">
-                    <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">Home - Transporters</span> </h4>
+                    <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">Home - </span>  Transporter</h4>
                     <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
+                </div>
+
+                <div class="header-elements d-none">
+                    <div class="d-flex justify-content-center">
+                        <router-link to="/transporters/new"  class="btn btn-link btn-float text-default">
+                            <i class="icon-add text-primary"></i> 
+                            <span>Add New Transporter</span>
+                        </router-link>
+                        <router-link to="/transporters" class="btn btn-link btn-float text-default">
+                            <i class="icon-calculator text-warning"></i>
+                            <span>View all Transtransporters</span>
+                        </router-link>
+                    </div>
                 </div>
             </div>
         </div>
+
+        <router-view></router-view>
+        
         <div class="row">
             <div class="col-md-12">
-                <router-view></router-view>
-            </div>
-
-            <div class="col-md-5">
-                &nbsp;
-                <app-transporter-form></app-transporter-form>
-                
-                
-            </div>
-            <div class="col-md-7">
-                &nbsp;
-                <list-loader :speed="2" v-if="!myData"></list-loader>
                 <table class="table table-bordered">
                     <thead class="table-success font-weight-bold">
                         <tr>
-                            <td colspan="6" class="text-primary">Total number of invoice subheading: </td>
+                            <td colspan="6" class="text-primary">Transport Count: (0) </td>
+                        </tr>
+                        <tr>
+                            <td colspan="6" class="text-primary">
+                                <input type="text" class="form-control" placeholder="Search Transporter">
+                            </td>
                         </tr>
                         <tr>
                             <td class="text-center">SN</td>
@@ -41,6 +50,16 @@
                         <app-transporter></app-transporter>
                     </transition-group>
                 </table>
+
+            </div>
+
+            <div class="col-md-5">
+                &nbsp;
+            </div>
+            <div class="col-md-7">
+                &nbsp;
+                
+                
             </div>
         </div>
         
@@ -49,10 +68,8 @@
 
 <script>
 import Transporter from './Transporter.vue'
-import TransporterForm from './TransportForm.vue'
+import SharedHeader from './SharedHeader.vue'
 import { ListLoader } from 'vue-content-loader'
-import { ContentLoader } from 'vue-content-loader'
-// or InstagramLoader | ListLoader | BullestlistLoader | CodeLoader
 
 export default {
     data() {
@@ -60,11 +77,12 @@ export default {
             myData: null
         }
     },
+
     components: {
         appTransporter: Transporter,
-        appTransporterForm: TransporterForm,
+        appSharedHeader: SharedHeader,
         ListLoader,
-        ContentLoader
-    }
+    },
+   
 }
 </script>

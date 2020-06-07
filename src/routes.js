@@ -12,6 +12,7 @@ import InvoiceSubheading from './components/preferences/invoice-subheading/Invoi
 import BuhTarget from './components/preferences/buh-targets/BuhTargets.vue'
 
 import Transporters from './components/transporter/Transporters'
+import TransporterForm from './components/transporter/TransporterForm.vue'
 import Trucks from './components/trucks/Trucks.vue'
 import Drivers from './components/drivers/Drivers.vue'
 
@@ -19,7 +20,7 @@ import Drivers from './components/drivers/Drivers.vue'
 
 export const routes = [
     { path: '*', redirect: '/' },
-    {path: '', component: Login, name: 'login'},
+    { path: '', component: Login, name: 'login' },
     { path: '/dashboard', component: Dashboard, name: 'dashboard'},
     { path: '/sign-up', component: Register, name: 'register' },
     
@@ -43,7 +44,9 @@ export const routes = [
             { path: 'unit-head-targets', component: BuhTarget, name: 'unitheadtarget' },
         ]
     }, 
-    { path: '/transporters', component: Transporters, name: 'transporters'},
+    { path: '/transporters', component: Transporters, name: 'transporters', children:[
+        { path: 'new', component:TransporterForm, name: 'newTransporter'}
+    ]},
     { path: '/trucks', component: Trucks, name: 'trucks'},
     { path: '/drivers', component: Drivers, name: 'drivers'}
 ]
