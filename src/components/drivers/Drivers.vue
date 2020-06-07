@@ -21,29 +21,40 @@
             </div>
             <div class="col-md-7">
                 &nbsp;
-                <list-loader :speed="2" v-if="!myData"></list-loader>
-                <table class="table table-bordered">
+                <list-loader :speed="2" v-if="!drivers"></list-loader>
+                <table class="table table-bordered" v-else>
                     <thead class="table-success font-weight-bold">
                         <tr>
-                            <td colspan="6" class="text-primary">Total number of invoice subheading: </td>
+                            <td colspan="7" class="text-primary">Drivers Count: ({{ drivers.length }}) </td>
+                        </tr>
+                        <tr>
+                            <td colspan="7" class="text-primary">
+                                <input type="text" class="form-control" placeholder="Search Driver by Name" v-model="searchDriverName" />
+                            </td>
                         </tr>
                         <tr>
                             <td class="text-center">SN</td>
-                            <td>Client Name</td>
-                            <td>Alt - S.O.</td> 
-                            <td>Alt - Invoice No.</td>         
+                            <td>Driver</td>
+                            <td>Motor Boy</td>
                             <td class="text-center">Edit</td>
                             <td class="text-center">Delete</td>
                         </tr>
                     </thead>
                    
-                    <transition-group enter-to-class="animated fadeIn" leave-to-class="animated fadeOut" tag="tbody" class="font-size-sm">
-                        <app-driver></app-driver>
+                   <tr v-if="drivers.length <= 0">
+                        <td colspan="7" class="text-info font-size-sm">You currently do not have any driver information</td>
+                   </tr>
+                    <transition-group enter-to-class="animated fadeIn" leave-to-class="animated fadeOut" tag="tbody" class="font-size-sm" mode="out-in">
+                        <app-driver 
+                            v-for="(driver, index) in filteredDrivers" 
+                            :key="driver.driver" 
+                            :sn="index += 1" 
+                            :driver="driver"
+                            :class="{'table-success': index % 2 !=0 }"></app-driver>
                     </transition-group>
                 </table>
             </div>
         </div>
-        
     </div>
 </template>
 
@@ -51,18 +62,32 @@
 import Driver from './Driver.vue'
 import DriverForm from './DriverForm.vue'
 import { ListLoader } from 'vue-content-loader'
-// or InstagramLoader | ListLoader | BullestlistLoader | CodeLoader
 
 export default {
     data() {
         return {
-            myData: null
+            searchDriverName: ''
         }
     },
+    computed: {
+        drivers() {
+            return this.$store.getters.drivers
+        },
+        filteredDrivers() {
+            return this.drivers.filter(driverName => {
+                return driverName.driver.match(this.searchDriverName);
+            })
+        }
+    },
+
     components: {
         appDriver: Driver,
         appDriverForm: DriverForm,
         ListLoader
+    },
+
+    created() {
+        this.$store.dispatch('fetchDrivers')
     }
 }
 </script>
