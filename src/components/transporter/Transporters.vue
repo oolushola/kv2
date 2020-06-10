@@ -29,36 +29,32 @@
                 <table class="table table-bordered">
                     <thead class="table-success font-weight-bold">
                         <tr>
-                            <td colspan="6" class="text-primary">Transport Count: (0) </td>
+                            <td colspan="7" class="text-primary">Transport Count: ({{ transporters.length }}) </td>
                         </tr>
                         <tr>
-                            <td colspan="6" class="text-primary">
-                                <input type="text" class="form-control" placeholder="Search Transporter">
+                            <td colspan="7" class="text-primary">
+                                <input type="text" class="form-control" placeholder="Search Transporter" v-model="searchTransporter">
                             </td>
                         </tr>
                         <tr>
                             <td class="text-center">SN</td>
-                            <td>Client Name</td>
-                            <td>Alt - S.O.</td> 
-                            <td>Alt - Invoice No.</td>         
+                            <td>Basic Information</td>
+                            <td>Bank Details</td> 
+                            <td>Guarantor</td>  
+                            <td>Next of Kin</td>         
                             <td class="text-center">Edit</td>
                             <td class="text-center">Delete</td>
                         </tr>
+                        <tr>
+                            <td colspan="7" class="text-danger text-center">No information has been recorded.</td>
+                        </tr>
                     </thead>
                    
-                    <transition-group enter-to-class="animated fadeIn" leave-to-class="animated fadeOut" tag="tbody" class="font-size-sm">
-                        <app-transporter></app-transporter>
+                    <transition-group enter-to-class="animated fadeIn" leave-to-class="animated fadeOut" tag="tbody" class="font-size-sm" mode="out-in">
+                        
+                        <app-transporter v-for="(transporter, index) in filteredTransporters" :key="transporter.transporter" :sn="index += 1" :transporter="transporter"></app-transporter>
                     </transition-group>
                 </table>
-
-            </div>
-
-            <div class="col-md-5">
-                &nbsp;
-            </div>
-            <div class="col-md-7">
-                &nbsp;
-                
                 
             </div>
         </div>
@@ -68,21 +64,36 @@
 
 <script>
 import Transporter from './Transporter.vue'
-import SharedHeader from './SharedHeader.vue'
 import { ListLoader } from 'vue-content-loader'
 
 export default {
     data() {
         return {
-            myData: null
+            myData: null,
+            searchTransporter: ''
+        }
+    },
+
+    computed: {
+        transporters() {
+            return this.$store.getters.transporterList
+        },
+
+        filteredTransporters() {
+            return this.transporters.filter(transporter => {
+                return transporter.transporter.match(this.searchTransporter);
+            })
         }
     },
 
     components: {
         appTransporter: Transporter,
-        appSharedHeader: SharedHeader,
         ListLoader,
     },
+
+    created() {
+        this.$store.dispatch('fetchTransporters')
+    }
    
 }
 </script>
