@@ -43,6 +43,7 @@
                                             <p v-if="$v.formData.assignedStaff.$error" class="error">Assigned Staff is required.</p>
                                         </div>
                                     </div>
+
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>Transporter Name</label>
@@ -51,10 +52,9 @@
                                                 @blur="$v.formData.transporterName.$touch()"
                                                 :class="{'notificationLabel animated shake ': $v.formData.transporterName.$error}"  />
                                             <span class="error" v-if="!$v.formData.transporterName.required">Transporter name is required.</span>
-                                            <span class="error" v-if="!$v.formData.transporterName.alpha">Only alphabeths are allowed.</span>
                                         </div>
-                                        
                                     </div>
+
                                     <div class="col-md-6 font-weight-bold">
                                         <div class="form-group">
                                             <label>Email</label>
@@ -66,6 +66,7 @@
                                             <p class="error" v-if="!$v.formData.email.email">Only valid email is required.</p>
                                         </div>
                                     </div>
+
                                     <div class="col-md-6 font-weight-bold">
                                         <div class="form-group">
                                             <label>Phone Number</label>
@@ -81,6 +82,7 @@
                                             </p>
                                         </div>
                                     </div>
+
                                     <div class="col-md-6 font-weight-bold">
                                         <div class="form-group">
                                             <label>Alternative Phone Number</label>
@@ -97,6 +99,7 @@
                                             </p>
                                         </div>
                                     </div>
+
                                     <div class="col-md-12 font-weight-bold">
                                         <div class="form-group">
                                             <label>Address</label>
@@ -107,6 +110,7 @@
                                 </div>
                                 
                                 <div class="row mt-3" id="bankDetails" :class="{'show': selected === 'Bank Details', 'hidden' :selected !=='Bank Details' }">
+
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>Account Type</label>
@@ -117,6 +121,7 @@
                                             <p v-if="$v.formData.accountType.$error" class="error">Account type is required.</p>
                                         </div>
                                     </div>
+
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>Bank Name</label>
@@ -124,6 +129,7 @@
                                             <p v-if="!$v.formData.bankName.required" class="error">Bank name is required</p>
                                         </div>
                                     </div>
+
                                     <div class="col-md-6 font-weight-bold">
                                         <div class="form-group">
                                             <label>Account Name</label>
@@ -131,10 +137,11 @@
                                         <p v-if="!$v.formData.accountName.required" class="error">Account name is required</p>
                                         </div>
                                     </div>
+
                                     <div class="col-md-6 font-weight-bold">
                                         <div class="form-group">
                                             <label>Account No</label>
-                                            <input type="text" class="form-control" v-model.trim.number="formData.accountNo"  @blur="$v.formData.accountNo.$touch()" v-model.lazy.trim="$v.formData.accountNo.$model" :class="{'notificationLabel animated shake': $v.formData.accountNo.$error }" />
+                                            <input type="text" class="form-control" v-model.trim.number.lazy="formData.accountNo"  @blur="$v.formData.accountNo.$touch()" v-model.lazy.trim="$v.formData.accountNo.$model" :class="{'notificationLabel animated shake': $v.formData.accountNo.$error }" />
                                             <p class="error" v-if="!$v.formData.accountNo.required">Account No. is required.</p>
                                             <p class="error" v-if="!$v.formData.accountNo.numeric">Only numbers are allowed.</p>
                                             <p class="error" v-if="!$v.formData.accountNo.minLen">
@@ -148,24 +155,48 @@
                                 </div>
 
                                 <div class="row mt-3" id="guarantor" :class="{'show': selected === 'Guarantor', 'hidden' :selected !=='Guarantor' }">
-                                    <div class="col-md-12">
+                                    <div class="col-md-6">
                                         <div class="form-group">
                                             <label>Full Name</label>
-                                            <select class="form-control">
-                                                <option value="">Choose a client</option>
-                                            </select>
+                                            <input type="text" class="form-control" placeholder="Optional" v-model.lazy="formData.guarantor"  />
+                                            
                                         </div>
                                     </div>
+
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>Guarantor Phone No.</label>
-                                            <input type="text" class="form-control" />
+                                            <input type="text" class="form-control" placeholder="Optional" v-model.lazy="$v.formData.guarantorPhoneNo.$model"  :class="{'notificationLabel animated shake' : $v.formData.guarantorPhoneNo.$error }" @blur="$v.formData.guarantorPhoneNo.$touch()"  />
+                                            <p v-if="!$v.formData.guarantorPhoneNo.numeric" class="error">Only numbers are allowed.</p>
+                                            <p v-if="!$v.formData.guarantorPhoneNo.minLen" class="error">
+                                                Minimum phone numbers allowed is {{ $v.formData.guarantorPhoneNo.$params.minLen.min }}
+                                            </p>
+                                            <p v-if="!$v.formData.guarantorPhoneNo.maxLen" class="error">
+                                                Maximum phone numbers allowed is {{ $v.formData.guarantorPhoneNo.$params.maxLen.max }}
+                                            </p>
                                         </div>
                                     </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Alternate Phone No.</label>
+                                            <input type="text" class="form-control" placeholder="Optional" 
+                                                v-model.lazy="$v.formData.gurantorAltPhoneNo.$model"  
+                                                :class="{'notificationLabel animated shake' : $v.formData.gurantorAltPhoneNo.$error }" @blur="$v.formData.gurantorAltPhoneNo.$touch()"  />
+                                            <p v-if="!$v.formData.gurantorAltPhoneNo.numeric" class="error">Only numbers are allowed.</p>
+                                            <p v-if="!$v.formData.gurantorAltPhoneNo.minLen" class="error">
+                                                Minimum phone numbers allowed is {{ $v.formData.gurantorAltPhoneNo.$params.minLen.min }}
+                                            </p>
+                                            <p v-if="!$v.formData.gurantorAltPhoneNo.maxLen" class="error">
+                                                Maximum phone numbers allowed is {{ $v.formData.gurantorAltPhoneNo.$params.maxLen.max }}
+                                            </p>
+                                        </div>
+                                    </div>
+
                                     <div class="col-md-6 font-weight-bold">
                                         <div class="form-group">
-                                            <label>Address.</label>
-                                        <input type="text" class="form-control"  />
+                                            <label>Address</label>
+                                            <input type="text" class="form-control" placeholder="Optional" v-model="formData.guarantorAddress"  />
                                         </div>
                                     </div>
                                 </div>
@@ -174,25 +205,60 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>Full Name</label>
-                                            <input type="text" class="form-control" />
+                                            <input type="text" class="form-control" v-model.lazy="formData.nextOfKin" />
                                         </div>
                                     </div>
+
                                     <div class="col-md-6 font-weight-bold">
                                         <div class="form-group">
                                             <label>Phone No.</label>
-                                        <input type="text" class="form-control"  />
+                                            <input type="text" class="form-control"
+                                                v-model="$v.formData.nokPhoneNo.$model"
+                                                @blur="$v.formData.nokPhoneNo.$touch()"
+                                                :class="{'notificationLabel animated shake': $v.formData.nokPhoneNo.$error }"  />
+                                                
+                                            <p v-if="!$v.formData.nokPhoneNo.numeric" class="error">Only numbers are allowed.</p>
+                                            <p v-if="!$v.formData.nokPhoneNo.minLen" class="error">
+                                                Minimum phone numbers allowed is {{ $v.formData.nokPhoneNo.$params.minLen.min }}
+                                            </p>
+                                            <p v-if="!$v.formData.nokPhoneNo.maxLen" class="error">
+                                                Maximum phone numbers allowed is {{ $v.formData.nokPhoneNo.$params.maxLen.max }}
+                                            </p>
                                         </div>
                                     </div>
+
+                                    <div class="col-md-6 font-weight-bold">
+                                        <div class="form-group">
+                                            <label>Phone No.</label>
+                                            <input type="text" class="form-control"
+                                                v-model="$v.formData.nokAltPhoneNo.$model"
+                                                @blur="$v.formData.nokAltPhoneNo.$touch()"
+                                                :class="{'notificationLabel animated shake': $v.formData.nokAltPhoneNo.$error }"  />
+                                                
+                                            <p v-if="!$v.formData.nokAltPhoneNo.numeric" class="error">Only numbers are allowed.</p>
+                                            <p v-if="!$v.formData.nokAltPhoneNo.minLen" class="error">
+                                                Minimum phone numbers allowed is {{ $v.formData.nokAltPhoneNo.$params.minLen.min }}
+                                            </p>
+                                            <p v-if="!$v.formData.nokAltPhoneNo.maxLen" class="error">
+                                                Maximum phone numbers allowed is {{ $v.formData.nokAltPhoneNo.$params.maxLen.max }}
+                                            </p>
+                                        </div>
+                                    </div>
+
                                     <div class="col-md-6 font-weight-bold">
                                         <div class="form-group">
                                             <label>Relationship.</label>
-                                        <input type="text" class="form-control"  />
+                                            <input type="text" class="form-control" 
+                                                v-model="$v.formData.relationshipWithNok.$model"
+                                                :class="{'notificationLabel animated shake': $v.formData.relationshipWithNok.$error}"
+                                                @blur="$v.formData.relationshipWithNok.$touch()"  />
+                                                <p v-if="!$v.formData.relationshipWithNok.alpha" class="error">Only alphabeths are allowed.</p>
                                         </div>
                                     </div>
                                     <div class="col-md-12 font-weight-bold">
                                         <div class="form-group">
                                             <label>Address</label>
-                                            <textarea class="form-control"></textarea>
+                                            <textarea class="form-control" v-model="formData.nokAddress"></textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -202,14 +268,23 @@
                                     <p style="font-size:10px; cursor:pointer" @click="addmore" class="text-danger-400">Add More Documents</p>
                                     <div class="form-group row" v-for="(document, index) in documents" :key="index">
                                         <input type="file" name="document[]" class="col-md-5" style="font-size:10px; top:5px;">
-                                        <input type="text" name="description[]" class="" placeholder="Description" v-model.trim="document.value">
-                                         <span class="icon-x mt-1 text-danger" @click="removeDocument(index)" v-if="index>0"></span>
+
+                                        <input type="text" name="description[]" placeholder="Description" 
+                                            v-model.lazy="$v.documents.$each[index].value.$model"
+                                            @blur="$v.documents.$each[index].$touch()"
+                                            :class="{ 'notificationLabel animated shake':$v.documents.$each[index].$error }" />
+                                         <span class="icon-x mt-1 text-danger" @click="removeDocument(index)" v-if="index > 0"></span>
+                                        <span v-if="!$v.documents.$each[index].value.alpha" class="error"> - Only alphabeths are allowed.</span>
+
                                     </div>
+                                    
                                 </div>
 
                                 <div class="text-right">
-                                    <span ref="loader"></span>    
-                                        <button type="submit" class="btn btn-primary" :disabled="$v.$invalid" >Add Transporter<i class="icon-paperplane ml-2"></i></button>
+                                    <span ref="loader" class="error"></span>    
+                                        <button type="submit" class="btn btn-primary" :disabled="$v.$invalid" @click.prevent="addTransporter" v-if="!onEdit">Add Transporter<i class="icon-paperplane ml-2" ></i></button>
+
+                                        <button type="submit" class="btn btn-primary" @click.prevent="updateTransporter" v-else>Update Transporter<i class="icon-paperplane ml-2" ></i></button>
                                 </div>
                             </div>
                         </form>
@@ -217,8 +292,70 @@
                 </div>
             </div>
             <div class="col-md-7">
-                <h2>{{ staffs }}</h2>
+                <div>
+                    <table class="table table-bordered" v-if="formData.assignedStaff">
+                        <tbody>
+                            <tr v-if="formData.assignedStaff">
+                                <td class="font-weight-bold" colspan="2">Basic Information</td>
+                            </tr>
+                            <tr v-if="formData.assignedStaff">
+                                <td>
+                                    <h6 class="text-primary">{{ formData.transporterName }}</h6>
+                                    <span>{{ formData.email }}</span>
+                                </td>
+                                <td>
+                                    <span class="d-block">{{ formData.phoneNo}}</span>
+                                    <span class="d-block">{{ formData.altPhoneNo}}</span>
+                                    <span class="d-block text-danger">{{ formData.address }}</span>
+                                </td>
+                            </tr>
+                            <tr v-if="formData.accountType">
+                                <td class="font-weight-bold" colspan="2">Bank Details</td> 
+                            </tr>
+                            <tr v-if="formData.accountType">
+                                <td>
+                                    <span v-if="formData.accountType">Account Type: {{ formData.accountType }}</span>
+                                    <h6 class="text-primary">{{ formData.accountNo }}</h6>
+                                </td>
+                                <td>
+                                    <span class="d-block">{{ formData.accountName }}</span>
+                                    <span class="d-block text-danger">{{ formData.bankName }}</span>
+                                </td>
+                            </tr>
+                            
+                            <tr v-if="formData.guarantor">
+                                <td class="font-weight-bold" colspan="2">Guarantor</td> 
+                            </tr>
+                            <tr v-if="formData.guarantor">
+                                <td>
+                                    <h6 class="text-primary">{{ formData.guarantor }}</h6>
+                                    <span class="d-block text-danger">{{ formData.guarantorAddress }}</span>
+                                </td>
+                                <td>
+                                    <span class="d-block">{{ formData.guarantorPhoneNo }} </span>
+                                    <span class="d-block">{{ formData.gurantorAltPhoneNo }}</span>
+                                </td>
+                            </tr>
+                            <tr v-if="formData.nextOfKin"> 
+                                <td class="font-weight-bold" colspan="2">Next of Kin</td>         
+                            </tr>
+                            <tr v-if="formData.nextOfKin">
+                                <td>
+                                    <h6 class="text-primary">{{ formData.nextOfKin }}</h6>
+                                    <span v-if="formData.relationshipWithNok">Relationship: {{ formData.relationshipWithNok }}</span>
+                                </td>
+                                <td>
+                                    <span class="d-block">{{ formData.nokPhoneNo }} </span>
+                                    <span class="d-block">{{ formData.nokAltPhoneNo }}</span>
+                                    <span class="d-block text-danger">{{ formData.nokAddress }}</span>
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
             </div>
+            {{ transporterDetails }}
         </section>
     </div>
 </template>
@@ -254,56 +391,38 @@ export default {
                 guarantorAddress: '',
                 nextOfKin: '',
                 nokPhoneNo: '',
-                nokAltNo: '',
+                nokAltPhoneNo: '',
                 relationshipWithNok: '',
                 nokAddress: ''
-            }
+            },
+            onEdit: false,
+            transporterId: null
         }
     },
 
     validations: {
         formData: {
-            assignedStaff: {
-                required,
-            },
-            transporterName: {
-                required,
-                alpha,
-                
-            },
-            email: {
-                required,
-                email
-            },
-            phoneNo: {
-                required,
-                minLen: minLength(11),
-                maxLen: maxLength(13),
-                numeric
-            },
-            altPhoneNo: {
-                minLen: minLength(11),
-                maxLen: maxLength(13),
-                numeric
-            },
-            address: {
-                alphaNum,
-                required
-            },
-            accountType: {
-                required,
-            },
-            bankName: {
-                required,
-            },
-            accountName: {
-                required,
-            },
-            accountNo: {
-                required,
-                numeric,
-                minLen: minLength(10),
-                maxLen: maxLength(10)
+            assignedStaff: { required },
+            transporterName: { required },
+            email: { required,  email },
+            phoneNo: { required, minLen: minLength(11), maxLen: maxLength(13), numeric },
+            altPhoneNo: { minLen: minLength(11), maxLen: maxLength(13), numeric },
+            address: { required },
+            accountType: { required  },
+            bankName: { required },
+            accountName: { required },
+            accountNo: { required, numeric, minLen: minLength(10), maxLen: maxLength(10) },
+            guarantorPhoneNo: { numeric, minLen: minLength(11), maxLen: maxLength(13) },
+            gurantorAltPhoneNo: { numeric, minLen: minLength(11), maxLen: maxLength(13) },
+            nokPhoneNo: { numeric, minLen: minLength(11), maxLen: maxLength(13) },
+            nokAltPhoneNo: { numeric, minLen: minLength(11), maxLen: maxLength(13) },
+            relationshipWithNok: { alpha },
+        },
+        documents: {
+            $each: {
+                value: {
+                    alpha
+                }
             }
         }
     },
@@ -311,7 +430,38 @@ export default {
     computed: {
         staffs() {
             return this.$store.getters.staffs
+        },
+
+        transporterDetails() {
+            const record = this.$store.getters.transporter;
+            if(record) {
+                const staff = this.staffs.find(element => element.userId === record.userId)
+                
+                this.formData.assignedStaff = staff,
+                this.formData.transporterName = record.transporter,
+                this.formData.email = record.email
+                this.formData.phoneNo = record.phoneNumber
+                this.formData.altPhoneNo = record.phoneNumberTwo
+                this.formData.address = record.address
+                this.formData.bankName = record.bankName
+                this.formData.accountName = record.accountName
+                this.formData.accountType = record.accountType
+                this.formData.accountNo = record.accountNo
+                this.formData.guarantor = record.guarantor
+                this.formData.guarantorPhoneNo = record.guarantorPhoneNo,
+                this.formData.gurantorAltPhoneNo = record.guarantorPhoneNoTwo,
+                this.formData.guarantorAddress = record.guarantorAddress
+                this.formData.nextOfKin = record.nextOfKin
+                this.formData.nokPhoneNo = record.nokPhoneNo
+                this.formData.nokAltPhoneNo = record.nokPhoneNoTwo,
+                this.formData.relationshipWithNok = record.relationship,
+                this.formData.nokAddress = record.nokAddress
+                this.transporterId = record.id
+
+            }
+            
         }
+        
     },
 
     methods: {
@@ -330,13 +480,52 @@ export default {
             const count = this.documents.length + 1
             this.documents.push({ id: count, value:''});
         },
+
         removeDocument(index) {
             this.documents.splice(index, 1);
+        },
+
+        addTransporter() {
+            this.$refs.loader.innerHTML = 'Saving...'
+            this.$store.dispatch('addTransporter', this.formData);
+            this.$refs.loader.innerHTML = 'Saved Successfully'
+            this.formData = {};
+            this.formData.assignedStaff = ''
+        },
+
+        updateTransporter() {
+            this.$v.$touch();
+            if(this.$v.$invalid) {
+                this.$refs.loader.innerHTML = '<i class="icon-x"></i>One or more error is preventing the update. Please check again'
+                return false
+            }
+            else {
+                this.$refs.loader.innerHTML = 'Updating, Please wait...'
+                this.$store.dispatch('updateTransporter', {
+                    formData: this.formData,
+                    transporterId: this.transporterId
+                })
+                this.$refs.loader.innerHTML = '<i class="icon-checkmark2"></i> Updated'
+            }
         }
     },
+
+    watch: {
+        '$route' : function() {
+           if(this.$route.params.id) {
+            this.$store.dispatch('transporterDetails', this.$route.params.id)
+            this.onEdit = true
+           } 
+        }
+    },
+
     created() {
         this.$store.dispatch('fetchTransporters')
-    }
+        if(this.$route.params.id) {
+            this.$store.dispatch('transporterDetails', this.$route.params.id)
+            this.onEdit = true
+        }
+    },
 }
 
 </script>

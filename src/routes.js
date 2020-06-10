@@ -45,7 +45,8 @@ export const routes = [
         ]
     }, 
     { path: '/transporters', component: Transporters, name: 'transporters', children:[
-        { path: 'new', component:TransporterForm, name: 'newTransporter'}
+        { path: 'new', component:TransporterForm, name: 'newTransporter'},
+        { path: ':id/edit', component: TransporterForm, name: 'editTransporter'}
     ]},
     { path: '/trucks', component: Trucks, name: 'trucks'},
     { path: '/drivers', component: Drivers, name: 'drivers'}
