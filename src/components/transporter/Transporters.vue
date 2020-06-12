@@ -45,7 +45,7 @@
                             <td class="text-center">Edit</td>
                             <td class="text-center">Delete</td>
                         </tr>
-                        <tr>
+                        <tr v-if="transporters.length <= 0">
                             <td colspan="7" class="text-danger text-center">No information has been recorded.</td>
                         </tr>
                     </thead>

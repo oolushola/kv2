@@ -16,6 +16,10 @@ import TransporterForm from './components/transporter/TransporterForm.vue'
 import Trucks from './components/trucks/Trucks.vue'
 import Drivers from './components/drivers/Drivers.vue'
 
+import Clients from './components/clients/Clients.vue'
+import ClientForm from'./components/clients/ClientForm.vue'
+import ClientProduct from './components/clients/product/ClientProduct.vue'
+
 
 
 export const routes = [
@@ -49,6 +53,12 @@ export const routes = [
         { path: ':id/edit', component: TransporterForm, name: 'editTransporter'}
     ]},
     { path: '/trucks', component: Trucks, name: 'trucks'},
-    { path: '/drivers', component: Drivers, name: 'drivers'}
+    { path: '/drivers', component: Drivers, name: 'drivers'},
+    { path: '/clients', component: Clients, name: 'clients', children: [
+        { path: 'new', component: ClientForm, name: 'newClient' },
+        { path: ':id/edit', component: ClientForm, name: 'updateClient' },
+        { path: ':client/product', component: ClientProduct, name:'clientProduct'}
+        
+    ]}
 ]
 
