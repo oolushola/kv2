@@ -20,10 +20,7 @@
 					<div class="card-body">
 						<div class="media">
 							<div class="mr-3">
-								
-									<span class="icon-user" style="font-size:40px;"></span>
-								
-
+								<span class="icon-user" style="font-size:40px;"></span>
 							</div>
 
 							<div class="media-body">
@@ -238,11 +235,11 @@
             </li>
 
 						<li class="nav-item">
-							<a href="clients" class="nav-link">
+							<router-link to="/clients" class="nav-link" tag="a" activeClass="active">
 								<i class="icon-list-ordered"></i>
 								<span>Clients</span>
 								<span class="badge bg-success align-self-center ml-auto">8 Active Clients</span>
-							</a>
+							</router-link>
 						</li>
 
 						

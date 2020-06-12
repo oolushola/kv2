@@ -63,9 +63,16 @@ export default {
     padding-top:3px;
     font-weight: normal;
   }
-   .notificationLabel {
-        border:1px solid red;
+  .notificationLabel {
+      border:1px solid red;
+  }
+   input, select, textarea {
+        border-radius:15px
     }
+    
+  body {
+    font-family:DIN Alternate;
+  }
 </style>
 
 
