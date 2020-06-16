@@ -26,7 +26,7 @@
             <span class="badge bg-primary mb-1">GSC - APAPA</span>
         </td>
         <td class="text-center actionCursor">
-            <router-link to="">
+            <router-link :to="link">
                 <i class="icon-basket text-primary mr-1 mb-2" title="Add Product"></i>
             </router-link>
 
@@ -47,7 +47,15 @@ import axios from 'axios'
 export default {
     data() {
         return {
-            api: axios.defaults.baseURL
+            api: axios.defaults.baseURL,
+            link: {
+                name: 'clientProduct',
+                params: {
+                    client: this.client.companyName.replace(/ /g, '-').toLowerCase(),
+                    id: this.client.id
+                    
+                }
+            }
         }
     },
     props: {

@@ -26,10 +26,8 @@
         
         <div class="row">
             <div class="col-md-12">
-                
-                    
+                &nbsp;
                 <list-loader :speed="2" v-if="!clients"></list-loader>
-            
                 <table class="table table-bordered" v-else>
                     <thead class="table-success font-weight-bold">
                         <tr>

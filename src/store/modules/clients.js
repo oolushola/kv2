@@ -4,7 +4,9 @@ const state = {
     clients: [],
     client: null,
     countries: [],
-    states: []
+    states: [],
+    products: [],
+    clientProducts: []
 }
 
 const mutations = {
@@ -23,6 +25,25 @@ const mutations = {
 
     'CLIENT_DETAILS' (state, client) {
         state.client = client
+    },
+
+    'PRODUCT_LISTING' (state, products) {
+        state.products = products
+    },
+
+    'CLIENT_PRODUCT_LISTINGS' (state, products) {
+        state.clientProducts = products
+    },
+
+    'ADD_CLIENT_PRODUCT'(state, products) {
+        state.clientProducts.unshift(products);
+    },
+
+    'REMOVE_PRODUCT' (state, productId) {
+        const product = state.clientProducts.find(product => product.id === productId);
+        if(product) {
+            state.clientProducts.splice(state.clientProducts.lastIndexOf(product), 1);
+        }
     }
 }
 
@@ -101,9 +122,43 @@ const actions = {
         .then(response => {
             //console.log(response)
         })
-    }
+    },
 
-    
+    products: ({ commit }) => {
+        axios.get('/products')
+        .then(response => {
+            commit('PRODUCT_LISTING', response.data.data);
+        })
+        .catch(error => { return error });
+    },
+
+    fetchClientProducts: ({ commit }, payload) => {
+        axios.get(`/client-products/${payload}`)
+        .then(response => {
+            commit('CLIENT_PRODUCT_LISTINGS', response.data.data);
+        })
+        .catch(error => { return error })
+    },
+
+    addClientProduct: ({ commit }, formData) => {
+        axios.post(`/client-products/${formData.clientId}`, {
+            product_id: formData.clientProduct.id
+        })
+        .then(response => {
+            commit('ADD_CLIENT_PRODUCT', response.data.data)
+        })
+        .catch(error => {
+            return error
+        })
+    },
+
+    removeClientProduct: ({ commit }, payload) => {
+        axios.delete(`/remove-client-product/${payload}`)
+        .then(response => {
+            commit('REMOVE_PRODUCT', payload)
+        })
+        .catch(error => { return error });
+    }
 }
 
 const getters = {
@@ -121,6 +176,14 @@ const getters = {
 
     clientDetails(state) {
         return state.client
+    },
+
+    fetchProducts(state) {
+        return state.products;
+    },
+
+    fetchClientProducts(state) {
+        return state.clientProducts;
     }
 }
 
