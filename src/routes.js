@@ -57,7 +57,7 @@ export const routes = [
     { path: '/clients', component: Clients, name: 'clients', children: [
         { path: 'new', component: ClientForm, name: 'newClient' },
         { path: ':id/edit', component: ClientForm, name: 'updateClient' },
-        { path: ':client/product', component: ClientProduct, name:'clientProduct'}
+        { path: ':client/product/:id', component: ClientProduct, name:'clientProduct'}
         
     ]}
 ]
