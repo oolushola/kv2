@@ -30,8 +30,8 @@
                                         <select class="form-control" 
                                             v-model="$v.formData.parentCompany.$model" @blur="$v.formData.parentCompany.$touch()">
                                             <option value="">Choose parent company</option>
-                                            <option :value="company.companyName" v-for="(company, index) in clients" :key="index">
-                                                {{company.companyName }}
+                                            <option :value="company.client.companyName" v-for="(company, index) in clients" :key="index">
+                                                {{company.client.companyName.toUpperCase() }}
                                             </option>
                                         </select>
                                     </div>
@@ -304,21 +304,19 @@ export default {
     watch: {
         '$route' : function() {
             if(this.$route.params.id) {
-            this.$store.dispatch('fetchClient', this.$route.params.id)
-            this.onEdit = true
+                this.$store.dispatch('fetchClient', this.$route.params.id)
+                this.onEdit = true
             }
         }
     },
 
     created() {
         this.$store.dispatch('clients')
-    },
-    mounted() {
-         if(this.$route.params.id) {
+        if(this.$route.params.id) {
             this.$store.dispatch('fetchClient', this.$route.params.id)
             this.onEdit = true
         }
-    }
+    },
 }
 
 </script>
