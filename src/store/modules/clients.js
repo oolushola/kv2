@@ -6,7 +6,9 @@ const state = {
     countries: [],
     states: [],
     products: [],
-    clientProducts: []
+    clientProducts: [],
+    clientLoadingSites: [],
+    assignedLoadingSites: []
 }
 
 const mutations = {
@@ -44,14 +46,36 @@ const mutations = {
         if(product) {
             state.clientProducts.splice(state.clientProducts.lastIndexOf(product), 1);
         }
+    },
+
+    'CLIENT_LOADING_SITE' (state, response) {
+        state.clientLoadingSites = response
+    },
+
+    'VIEW_ASSIGNED_LOADING_SITE' (state, response) {
+        state.assignedLoadingSites = response;
+    },
+
+    'ASSIGNED_LOADING_SITE' (state, response) {
+        state.assignedLoadingSites.unshift(response)
+    },
+
+    'REMOVE_CLIENT_LOADING_SITE' (state, response) {
+        state.assignedLoadingSites.map((el, i) => {
+            let record = state.assignedLoadingSites.find(loadingSite => loadingSite.id === response[i]);
+            if(record) {
+                state.assignedLoadingSites.splice(state.assignedLoadingSites.lastIndexOf(record), 1)
+            }
+        })
     }
+
 }
 
 const actions = {
     clients: ({ commit }) => {
         axios.get('/clients')
         .then(response => {
-            commit('CLIENTS', response.data);
+            commit('CLIENTS', response.data)
         })
         .catch(error => { return error })
     },
@@ -158,6 +182,49 @@ const actions = {
             commit('REMOVE_PRODUCT', payload)
         })
         .catch(error => { return error });
+    },
+
+    statesListings: ({ commit }) => {
+        axios.get('/states')
+        .then(response => {
+            commit('COUNTRY_STATE', response.data.states);
+        })
+        .catch(error => { return error });
+    },
+
+    clientLoadingSites: ({ commit }) => {
+        axios.get('/loading-sites').then(response => {
+            commit('CLIENT_LOADING_SITE', response.data.data)
+        }) 
+        .catch(error => { return error })
+    },
+
+    viewAssignedLoadingSite: ({ commit }, payload) => {
+        axios.get(`/client/loading-sites/${payload}`)
+        .then(response => {
+            commit('VIEW_ASSIGNED_LOADING_SITE', response.data.data);
+        })
+        .catch(error => { return error });
+    },
+
+    assignClientLoadingSite: ({ commit }, formData) => {
+        axios.post(`/client/loading-sites/${formData.clientId}`, {
+            loading_site_id: formData.loadingSites
+        })
+        .then(response => {
+            commit('ASSIGNED_LOADING_SITE', response.data.data)
+        })
+        .catch(error => { return error})
+    },
+
+    deleteClientLoadingSite: ({ commit }, formData) => {
+        axios.post(`/client/loading-sites/${formData.clientId}`, {
+            assigned_client_loading_site: formData.assignLoadingSites
+        })
+        .then(response => {
+            commit('REMOVE_CLIENT_LOADING_SITE', formData.assignLoadingSites)
+        })
+        .catch(error => { return error })
     }
 }
 
@@ -184,6 +251,14 @@ const getters = {
 
     fetchClientProducts(state) {
         return state.clientProducts;
+    },
+
+    fetchClientLoadingSites(state) {
+        return state.clientLoadingSites;
+    },
+
+    fetchAssignedLoadingSites(state) {
+        return state.assignedLoadingSites
     }
 }
 

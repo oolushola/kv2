@@ -16,26 +16,27 @@
             <span class="d-block ml-1 text-danger">State / Province: {{ client.state }}</span>
         </td>
         <td width="12%">
-            <span class="badge bg-primary mb-1 ml-1">MAIZE</span>
-            <span class="badge bg-primary mb-1 ml-1">FLOUR</span>
-            <span class="badge bg-primary mb-1 ml-1">CONTAINER</span>
-            
+            <span class="badge bg-primary mb-1 ml-1" 
+                v-for="(product, index) in products" :key="index">
+                    {{ product.ProductName.toUpperCase() }}
+            </span>            
         </td>
          <td width="12%">
-            <span class="badge bg-primary mb-1">GPF APAPA</span>
-            <span class="badge bg-primary mb-1">GSC - APAPA</span>
+            <span class="badge bg-primary mb-1" v-for="(loadingSite, index) in loadingSites" :key="index">{{ loadingSite.loadingSite.toUpperCase()}}</span>
         </td>
         <td class="text-center actionCursor">
             <router-link :to="link">
-                <i class="icon-basket text-primary mr-1 mb-2" title="Add Product"></i>
+                <i class="icon-basket mr-1 mb-2" title="Add Product" style="color:#333"></i>
+            </router-link>
+            <router-link :to="clientLoadingSiteLink" class="text-danger">
+                <i class="icon-lab mr-1 mb-2" title="Assign Loading Site"></i>
             </router-link>
 
-            <i class="icon-lab mr-1 mb-2" title="Assign Loading Site"></i>
             <i class="icon-coins text-info mr-1 mb-2" title="Add Route Pricing"></i>
             <router-link :to="'/clients/'+client.id+'/edit'">
                 <i class="icon-pencil3 text-primary mr-1 mb-2" title="Edit Client Information"></i>
             </router-link>
-
+            
             <i class="icon-trash text-danger mr-1 mb-2" :title="`Delete ${client.companyName}`"></i>
         </td>
     </tr>
@@ -52,10 +53,16 @@ export default {
                 name: 'clientProduct',
                 params: {
                     client: this.client.companyName.replace(/ /g, '-').toLowerCase(),
-                    id: this.client.id
-                    
+                    id: this.client.id,
                 }
-            }
+            },
+            clientLoadingSiteLink: {
+                name: 'clientLoadingSite',
+                params: {
+                    client: this.client.companyName.replace(/ /g, '-').toLowerCase(),
+                    id: this.client.id
+                }
+            },
         }
     },
     props: {
@@ -66,9 +73,18 @@ export default {
         client: {
             type: Object,
             required: true
+        },
+        products: {
+            required: true,
+            type: Array
+        },
+        loadingSites: {
+            required: true,
+            type: Array
         }
-    }
+    },
 }
+
 </script>
 
 <style scoped>

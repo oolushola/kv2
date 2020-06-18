@@ -28,37 +28,44 @@
             <div class="col-md-12">
                 &nbsp;
                 <list-loader :speed="2" v-if="!clients"></list-loader>
-                <table class="table table-bordered" v-else>
-                    <thead class="table-success font-weight-bold">
-                        <tr>
-                            <td colspan="7" class="text-primary">Client Count: ({{clients.length}}) </td>
-                        </tr>
-                        <tr>
-                            <td colspan="7" class="text-primary">
-                                <input type="text" class="form-control" placeholder="Search Transporter" v-model="searchClient">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="text-center">SN</td>
-                            <td>Basic Details</td> 
-                            <td>Other Information</td>
-                            <td>Products</td> 
-                            <td>Loading Sites</td> 
-                            <td class="text-center">Actions</td>
-                            
-                        </tr>
-                        <tr v-if="!clients">
-                            <td colspan="7" class="text-danger text-center">No information has been recorded.</td>
-                        </tr>
-                    </thead>
-                   
-                    <transition-group enter-to-class="animated fadeIn" leave-to-class="animated fadeOut" tag="tbody" class="font-size-sm" mode="out-in">
-                        <app-client v-for="(client, index) in filteredClient" :key="client.companyName" :sn="index +=1" :class="{'table-success' : index % 2 == 0}" :client="client"></app-client>
-                    </transition-group>
-                </table>
+                <div class="table-responsive"  v-else>
+                    <table class="table table-bordered">
+                        <thead class="table-success font-weight-bold">
+                            <tr>
+                                <td colspan="7" class="text-primary">Client Count: ({{clients.length}}) </td>
+                            </tr>
+                            <tr>
+                                <td colspan="7" class="text-primary">
+                                    <input type="text" class="form-control" placeholder="Search Transporter" v-model="searchClient">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="text-center">SN</td>
+                                <td>Basic Details</td> 
+                                <td>Other Information</td>
+                                <td>Products</td> 
+                                <td>Loading Sites</td> 
+                                <td class="text-center">Actions</td>
+                                
+                            </tr>
+                            <tr v-if="!clients">
+                                <td colspan="7" class="text-danger text-center">No information has been recorded.</td>
+                            </tr>
+                        </thead>
+                    
+                        <transition-group enter-to-class="animated fadeIn" leave-to-class="animated fadeOut" tag="tbody" class="font-size-sm" mode="out-in">
+                            <app-client 
+                                v-for="(client, index) in filteredClient" 
+                                :key="client.client.companyName" :sn="index +=1" 
+                                :class="{'table-success' : index % 2 == 0}" :client="client.client"
+                                :loadingSites="client.clientLoadingSite"
+                                :products="client.clientProduct"></app-client>
+                        </transition-group>
+                    </table>
+                </div>
+
             </div>
         </div>
-
     </div>
 </template>
 
@@ -81,7 +88,7 @@ export default {
 
         filteredClient() {
             return this.clients.filter(client => {
-                return client.companyName.match(this.searchClient)
+                return client.client.companyName.match(this.searchClient)
             })
         }
     },
