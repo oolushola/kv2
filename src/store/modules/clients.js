@@ -218,7 +218,7 @@ const actions = {
     },
 
     deleteClientLoadingSite: ({ commit }, formData) => {
-        axios.post(`/client/loading-sites/${formData.clientId}`, {
+        axios.post(`/client/loading-sites/${formData.clientId}/delete`, {
             assigned_client_loading_site: formData.assignLoadingSites
         })
         .then(response => {

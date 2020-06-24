@@ -21,6 +21,9 @@ import ClientForm from'./components/clients/ClientForm.vue'
 import ClientProduct from './components/clients/product/ClientProduct.vue'
 import ClientLoadingSites from './components/clients/loading-site/ClientLoadingSites.vue'
 
+import GateIn from './components/trips/GateIn.vue'
+import ExistingTrips from './components/trips/ExistingTrips.vue'
+
 
 
 export const routes = [
@@ -60,7 +63,9 @@ export const routes = [
         { path: ':id/edit', component: ClientForm, name: 'updateClient' },
         { path: ':client/product/:id', component: ClientProduct, name:'clientProduct'},
         { path: ':client/loading-site/:id', component: ClientLoadingSites, name:'clientLoadingSite' }
-        
-    ]}
+    ]},
+    { path: '/trip/new', component: GateIn, name: 'newTrip'},
+    { path: '/trip/:id/update/:clientName', component: GateIn, name: 'updateTrip' },
+    { path: '/trip/update/existing-trips', component: ExistingTrips, name: 'updateExistingTrip' }
 ]
 

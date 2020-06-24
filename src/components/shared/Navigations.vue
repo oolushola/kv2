@@ -75,16 +75,18 @@
 										Truck Availability</a>
 								</li>
 								<li class="nav-item">
-									<a href="trips" class="nav-link ">
-										Create New Trip</a>
+									<router-link to="/trip/new" tag="a" class="nav-link" activeClass="active">
+										Create New Order
+									</router-link>
 								</li>
 								<li class="nav-item">
 									<a href="truck-availability-list" class="nav-link">
 										Create Trip From Availability</a>
 								</li>
-								<li class="nav-item">
-									<a href="update-trip" class="nav-link">Update Existing Trip</a>
-								</li>
+								<router-link :to="{ name: 'updateExistingTrip' }" class="nav-link" tag="a">Update Existing Trip</router-link>
+								
+
+								
 								
 
 								
@@ -234,50 +236,50 @@
               <i class="icon-menu" title="Forms"></i>
             </li>
 
-						<li class="nav-item">
-							<router-link to="/clients" class="nav-link" tag="a" activeClass="active">
-								<i class="icon-list-ordered"></i>
-								<span>Clients</span>
-								<span class="badge bg-success align-self-center ml-auto">8 Active Clients</span>
-							</router-link>
-						</li>
+			<li class="nav-item">
+				<router-link to="/clients" class="nav-link" tag="a" activeClass="active">
+					<i class="icon-list-ordered"></i>
+					<span>Clients</span>
+					<span class="badge bg-success align-self-center ml-auto">8 Active Clients</span>
+				</router-link>
+			</li>
 
 						
-						<li class="nav-item-header"><div class="text-uppercase font-size-xs line-height-xs">Administrative Purpose</div> <i class="icon-menu" title="Main"></i></li>
+			<li class="nav-item-header"><div class="text-uppercase font-size-xs line-height-xs">Administrative Purpose</div> <i class="icon-menu" title="Main"></i></li>
 
-							<li class="nav-item nav-item-submenu">
-								<router-link to="preferences" class="nav-link">
-								<a><i class="icon-cog"></i> <span>Preference Settings</span></a>
-								</router-link>
+				<li class="nav-item nav-item-submenu">
+					<router-link to="preferences" class="nav-link">
+					<a><i class="icon-cog"></i> <span>Preference Settings</span></a>
+					</router-link>
 
-								<ul class="nav nav-group-sub" data-submenu-title="Starter kit">
-									<li class="nav-item">
-										<router-link to="/preferences/company-profile" class="nav-link" activeClass="active">Kaya Profile</router-link>
-									</li>
-									<li class="nav-item">
-										<router-link to="/preferences/products" class="nav-link">Products</router-link>
-									</li>
-									<li class="nav-item">
-										<router-link to="/preferences/truck-types" class="nav-link" activeClass="active">Truck Types</router-link>
-									</li>
-									<li class="nav-item">
-										<a href="/preferences/loading-sites" class="nav-link">Loading Sites</a>
-									</li>
-									<li class="nav-item">
-										<a href="cargo-availability" class="nav-link">Available Cargo</a>
-									</li>
-									<li class="nav-item">
-										<a href="kaya-target" class="nav-link">Targets</a>
-									</li>
-									<li class="nav-item">
-										<a href="invoice-subheading'" class="nav-link">Invoice Subheading</a>
-									</li>
-									<li class="nav-item">
-										<a href="buh-target'" class="nav-link">BUH Monthly Target</a>
-									</li>
-								</ul>
-							</li>
-					
+					<ul class="nav nav-group-sub" data-submenu-title="Starter kit">
+						<li class="nav-item">
+							<router-link to="/preferences/company-profile" class="nav-link" activeClass="active">Kaya Profile</router-link>
+						</li>
+						<li class="nav-item">
+							<router-link to="/preferences/products" class="nav-link">Products</router-link>
+						</li>
+						<li class="nav-item">
+							<router-link to="/preferences/truck-types" class="nav-link" activeClass="active">Truck Types</router-link>
+						</li>
+						<li class="nav-item">
+							<a href="/preferences/loading-sites" class="nav-link">Loading Sites</a>
+						</li>
+						<li class="nav-item">
+							<a href="cargo-availability" class="nav-link">Available Cargo</a>
+						</li>
+						<li class="nav-item">
+							<a href="kaya-target" class="nav-link">Targets</a>
+						</li>
+						<li class="nav-item">
+							<a href="invoice-subheading'" class="nav-link">Invoice Subheading</a>
+						</li>
+						<li class="nav-item">
+							<a href="buh-target'" class="nav-link">BUH Monthly Target</a>
+						</li>
+					</ul>
+				</li>
+		
 						
 						<li class="nav-item-header"><div class="text-uppercase font-size-xs line-height-xs">TRANSPORTATION</div> <i class="icon-menu" title="Components"></i></li>
 

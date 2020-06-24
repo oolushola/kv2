@@ -12,6 +12,7 @@ import trucks from './modules/transportation/trucks'
 import drivers from './modules/transportation/driver'
 import transporter from './modules/transportation/transporter'
 import client from './modules/clients'
+import orders from './modules/orders/orders'
 
 Vue.use(Vuex);
 
@@ -28,7 +29,8 @@ export const store = new Vuex.Store({
         trucks,
         drivers,
         transporter,
-        client
+        client,
+        orders
     },
     
 })
